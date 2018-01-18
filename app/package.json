@@ -1,0 +1,14 @@
+{
+  "name": "TickCollector",
+  "description": "App for capturing OANDA ticks",
+  "author": "Marcin Jedyk",
+  "version": "0.0.35",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "mongodb": "2.2.19",
+    "commander": "2.9.0"
+  }
+}

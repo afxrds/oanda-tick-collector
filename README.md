@@ -1,1 +1,1 @@
-# tick-collector
+# Simple Tick-Collector for OANDA Stream

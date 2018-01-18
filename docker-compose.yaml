@@ -1,0 +1,26 @@
+---
+version: "2.1"
+
+
+services:
+  tick-collector:
+    restart: always
+    image: rabbitmq:3.6-management
+    volumes:
+      - "/data/docker-local/rabbitmq:/var/lib/rabbitmq"
+    ports:
+      - "15671:15671"
+      - "15672:15672"
+      - "25672:25672"
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+  mongodb:
+    restart: always
+    image: mongo:3.4-jessie
+    #if you want to persist data between restarts create local directory you want to mount
+    # read more: https://docs.docker.com/engine/admin/volumes/volumes/
+    #volumes:
+    #  - "/local-dir-you-want-to-mount/mongodb:/data/db"
+    ports:
+      - "27017:27017"
