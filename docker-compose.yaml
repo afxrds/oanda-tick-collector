@@ -4,17 +4,21 @@ version: "2.1"
 
 services:
   tick-collector:
+    build:
+      dockerfile: Dockerfile
+      context: .
     restart: always
-    image: rabbitmq:3.6-management
-    volumes:
-      - "/data/docker-local/rabbitmq:/var/lib/rabbitmq"
-    ports:
-      - "15671:15671"
-      - "15672:15672"
-      - "25672:25672"
-      - "4369:4369"
-      - "5671:5671"
-      - "5672:5672"
+    environment:
+        - DOMAIN=stream-fxpractice.oanda.com
+        #remember, never check-in your ACCESS_TOKEN or ACCOUNT_ID to SCM or share with anyone!
+        - ACCESS_TOKEN=YOUR-TOKEN-HERE
+        - ACCOUNT_ID=YOUR-ACCOUNT-ID-HERE
+        - VERBOSE=0
+        - MONGODB_NAME=instruments
+        - MONGODB_HOST=mongodb-host-alias
+        - MONGODB_PORT=27017
+    links:
+      - mongodb:mongodb-host-alias
   mongodb:
     restart: always
     image: mongo:3.4-jessie
@@ -23,4 +27,4 @@ services:
     #volumes:
     #  - "/local-dir-you-want-to-mount/mongodb:/data/db"
     ports:
-      - "27017:27017"
+      - "27018:27017"

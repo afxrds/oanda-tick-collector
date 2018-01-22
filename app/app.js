@@ -53,7 +53,7 @@ var options = {
 console.log("Connecting to mongodb")
 MongoClient.connect(programParams.mongodb_url, function(err, _db) {
   assert.equal(null, err);
-  
+
   db = _db;
   collection = db.collection(programParams.collection);
 });
@@ -64,6 +64,7 @@ var request = https.request(options, function(response){
       log_msg("statusCode: " + response.statusCode, 1);
       response.on("data", function(chunk){
          bodyChunk = chunk.toString();
+         log_msg(bodyChunk, 0);
          try {
            ee.emit('tick', bodyChunk.slice(0, -1).split('\n'));
          }catch(err){
@@ -115,6 +116,5 @@ setInterval(function(){
     } else {
       prev_hb = last_hb;
       log_msg("HC passed " + new Date().toISOString(), 1)
-    }   
+    }
   }, 16000);
-
